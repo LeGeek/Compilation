@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Teste si les fichiers générés sont justes
-DIRECTORYTRUE="./ressources/*" #Dossier dans lequel il y a les corrections
+DIRECTORYTRUE="./ressources/AnalyseLexicale/*" #Dossier dans lequel il y a les corrections
 DIRECTORYTOTEST="./" #Dossier dans lequel il y a les fichiers générés
 
 for f in $DIRECTORYTRUE

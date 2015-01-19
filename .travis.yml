@@ -1,5 +1,5 @@
 language: c
 script:
-	- cd TP/
-	- make
-	- base ./test/testProcess.sh
+  - cd TP/
+  - make
+  - base ./test/testProcess.sh
