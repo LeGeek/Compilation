@@ -2,4 +2,4 @@ language: c
 script:
   - cd TP/
   - make
-  - base ./test/testProcess.sh
+  - bash ./test/testProcess.sh
