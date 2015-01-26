@@ -1,0 +1,5 @@
+language: c
+script:
+  - cd TP/
+  - make
+  - bash ./test/testProcess.sh
