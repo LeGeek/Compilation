@@ -1,7 +1,7 @@
 CC = gcc
 
 LIBS = -lm 
-CCFLAGS = -Wall -ggdb
+CCFLAGS = -Wall -ggdb -std=c99
 
 OBJ = analyseur_lexical.o util.o 
 

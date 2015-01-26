@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,12 +15,24 @@
  
 extern FILE *yyin;
 
+char tableSymbole[] = {
+  ';', '+', '-', '*', '/', '(', ')',
+  '[', ']', '{', '}', '=', '<',
+  '&', '|', '!', '\0'
+};
+
+int codeSymbole[] = {
+  POINT_VIRGULE, PLUS, MOINS, FOIS, DIVISE, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE,
+  CROCHET_OUVRANT, CROCHET_FERMANT, ACCOLADE_OUVRANTE, ACCOLADE_FERMANTE, EGAL, INFERIEUR,
+  ET, OU, NON
+};
+
 char *tableMotsClefs[] = {
-  "si", 
+  "si", "alors", "sinon", "tantque", "faire", "entier", "retour", "lire", "ecrire", '\0'
 };
 
 int codeMotClefs[] = { 
-  SI, 
+  SI, ALORS, SINON, TANTQUE, FAIRE, ENTIER, RETOUR, LIRE, ECRIRE
 };
 
 char yytext[YYTEXT_MAX];
@@ -82,12 +95,51 @@ void delireCar()
  * Pour les tokens de type ID_FCT, ID_VAR et NOMBRE la
  * valeur du token est dans yytext, visible dans l'analyseur syntaxique.
  ******************************************************************************/
+
+
 int yylex(void)
 {
   char c;
-  int i;
   yytext[yyleng = 0] = '\0';
+
+  if( mangeEspaces() == -1 ) return -1;
+  c = lireCar();
   
+  // Symbole simple
+  for( int i = 0; tableSymbole[i] != '\0'; ++i )
+  {
+    if( c != tableSymbole[i] ) continue;
+    return codeSymbole[i];
+  }
+
+  // Nombre
+  if( isdigit( c ) )
+  {
+    do
+    {
+      lireCar();
+    } 
+    while( isdigit( yytext[yyleng - 1] ) );
+    delireCar();
+
+    return ENTIER;
+  }
+
+  // Mot clefs
+  do
+  {
+    lireCar();
+  }
+  while( !isspace( yytext[ yyleng - 1 ] ) );
+
+  for( int i = 0; tableMotsClefs[i] != '\0'; ++i )
+  {
+    if( strcmp( tableMotsClefs[i], yytext ) ) continue;
+    return codeMotClefs[i];
+  }
+
+
+  return -1;
 }
 
 /*******************************************************************************
