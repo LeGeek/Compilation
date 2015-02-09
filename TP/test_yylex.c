@@ -18,7 +18,8 @@ char valeur[100];
   uniteCourante = yylex();
   while (uniteCourante != FIN) {
     nom_token( uniteCourante, nom, valeur );
-    printf("%s\t%s\t%s\n", yytext, nom, valeur);
+    printf( "%s %d\n", yytext, uniteCourante );
+    //printf("%s\t%s\t%s\n", yytext, nom, valeur);
     uniteCourante = yylex();
   }
   return 0;

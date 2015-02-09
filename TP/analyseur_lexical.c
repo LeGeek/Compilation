@@ -18,13 +18,13 @@ extern FILE *yyin;
 char tableSymbole[] = {
   ';', '+', '-', '*', '/', '(', ')',
   '[', ']', '{', '}', '=', '<',
-  '&', '|', '!', '\0'
+  '&', '|', '!', ',', '\0'
 };
 
 int codeSymbole[] = {
   POINT_VIRGULE, PLUS, MOINS, FOIS, DIVISE, PARENTHESE_OUVRANTE, PARENTHESE_FERMANTE,
   CROCHET_OUVRANT, CROCHET_FERMANT, ACCOLADE_OUVRANTE, ACCOLADE_FERMANTE, EGAL, INFERIEUR,
-  ET, OU, NON
+  ET, OU, NON, VIRGULE
 };
 
 char *tableMotsClefs[] = {
@@ -102,7 +102,11 @@ int yylex(void)
   char c;
   yytext[yyleng = 0] = '\0';
 
-  if( mangeEspaces() == -1 ) return -1;
+
+  // Commantaire
+  mangeEspaces();
+  if( feof( yyin ) ) return FIN;
+
   c = lireCar();
   
   // Symbole simple
@@ -122,7 +126,7 @@ int yylex(void)
     while( isdigit( yytext[yyleng - 1] ) );
     delireCar();
 
-    return ENTIER;
+    return NOMBRE;
   }
 
   // Mot clefs
@@ -131,14 +135,43 @@ int yylex(void)
     lireCar();
   }
   while( !isspace( yytext[ yyleng - 1 ] ) );
+  delireCar();
 
   for( int i = 0; tableMotsClefs[i] != '\0'; ++i )
   {
-    if( strcmp( tableMotsClefs[i], yytext ) ) continue;
+    if( strcmp( tableMotsClefs[i], yytext ) != 0 ) continue;
     return codeMotClefs[i];
   }
 
+  for(; yyleng != 1; delireCar() );
 
+
+  //id_var
+  if( c == '$' )
+  {
+    do
+    {
+      lireCar();
+    }
+    while( !isspace( yytext[ yyleng - 1 ] ) && yytext[ yyleng - 1 ] != ';' );
+    delireCar();
+    
+    return ID_VAR;
+  }
+
+  //id_fct
+  if( isalpha( c ) || c == '_' )
+  {
+    do
+    {
+      lireCar();
+    }
+    while( yytext[ yyleng - 1 ] != '(' );
+    delireCar();
+
+    return ID_FCT;
+  }
+    
   return -1;
 }
 
