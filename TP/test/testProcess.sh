@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Teste si les fichiers générés sont justes
-DIRECTORYSOURCE="./ressources/ProgrammeSource/*" #Dossier des fichier .l
-DIRECTORYTRUE="./ressources/AnalyseLexicale/*" #Dossier dans lequel il y a les corrections
+DIRECTORYSOURCE="./test/ressources/ProgrammeSource/*" #Dossier des fichier .l
+DIRECTORYTRUE="./test/ressources/AnalyseLexicale/*" #Dossier dans lequel il y a les corrections
 DIRECTORYTOTEST="./" #Dossier dans lequel il y a les fichiers générés
 
 pwd
@@ -10,7 +10,7 @@ pwd
 for f in $DIRECTORYSOURCE
 do
   echo "Execution du fichier : $f"
-  ./test_yylex "$pwd/test/$f"
+  ./test_yylex $f
   echo
   echo
   if (( $? != 0 )); then return 1; fi
