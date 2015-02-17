@@ -109,11 +109,15 @@ int yylex(void)
   if( feof( yyin ) ) return FIN;
 
   c = lireCar();
-  
+
   // Symbole simple
   for( int i = 0; tableSymbole[i] != '\0'; ++i )
   {
     if( c != tableSymbole[i] ) continue;
+   
+    char tmp[2] = { 0 };
+    tmp[0] = c;
+    affiche_element( "symbole", tmp, 1 );
     return codeSymbole[i];
   }
 
@@ -127,6 +131,7 @@ int yylex(void)
     while( isdigit( yytext[yyleng - 1] ) );
     delireCar();
 
+    affiche_element( "nombre", yytext, 1 );
     return NOMBRE;
   }
 
@@ -141,6 +146,8 @@ int yylex(void)
   for( int i = 0; tableMotsClefs[i] != '\0'; ++i )
   {
     if( strcmp( tableMotsClefs[i], yytext ) != 0 ) continue;
+
+    affiche_element( "mot-clef", yytext, 1 );
     return codeMotClefs[i];
   }
 
@@ -157,6 +164,7 @@ int yylex(void)
     while( !isspace( yytext[ yyleng - 1 ] ) && yytext[ yyleng - 1 ] != ';' && yytext[ yyleng - 1] != ',' && yytext[ yyleng - 1 ] != '[' );
     delireCar();
     
+    affiche_element( "id_variable", yytext, 1 );
     return ID_VAR;
   }
 
@@ -170,6 +178,7 @@ int yylex(void)
     while( yytext[ yyleng - 1 ] != '(' );
     delireCar();
 
+    affiche_element( "id_fonction", yytext, 1 );
     return ID_FCT;
   }
     
@@ -288,7 +297,7 @@ void PG()
 	if( est_premier( _optDecVariables_, yylval ) )
   {
     ODV();
-    if( est_premier( _listeDecVariables_, yylval ) )
+    if( est_premier( _listeDecFonctions_, yylval ) )
     {
       LDF();
     }

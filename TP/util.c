@@ -92,7 +92,7 @@ void affiche_element(char *fct_, char *texte_, int trace_xml)
 {
   if(trace_xml) {
     indent();
-    fprintf (stdout, "<%s> ", fct_ );
+    fprintf (stdout, "<%s>", fct_ );
     affiche_xml_texte( texte_ );
     fprintf (stdout, "</%s>\n", fct_ );
   }
