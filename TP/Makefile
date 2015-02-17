@@ -1,20 +1,30 @@
-CC = gcc
+CC=gcc
+CCFLAGS=-W -Wall -pedantic -std=gnu99 -I./include -I/usr/include
+LDFLAGS=
+SRC=$(wildcard *.c)
+OBJ=$(SRC:.c=.o)
+EXEC=test_yylex
 
-LIBS = -lm 
-CCFLAGS = -Wall -ggdb -std=c99
+all: $(EXEC)
 
-OBJ = analyseur_lexical.o util.o 
+$(EXEC): $(OBJ)
+	$(CC) -o $(EXEC) $^ $(LDFLAGS)
 
-all: test_yylex
-
-test_yylex: test_yylex.c $(OBJ)
-	$(CC) $(CCFLAGS) -o test_yylex test_yylex.c $(OBJ)
-
-analyseur_lexical.o: analyseur_lexical.c
-	$(CC) $(CCFLAGS) -c analyseur_lexical.c
-
-.PHONY : clean
+%.o: %.c
+	$(CC) -o $@ -c $< $(CCFLAGS)
 
 clean:
-	- rm -f $(OBJ)
-	- rm -f test_yylex
+	@echo "Clean .o files"
+	rm -rf *.o
+
+mrproper: clean
+	@echo "Remove $(EXEC) file"
+	rm -rf $(EXEC)
+
+rebuild:
+	@echo " --- Cleaning --- "
+	make mrproper
+	@echo
+	@echo
+	@echo " --- Building --- "
+	make all

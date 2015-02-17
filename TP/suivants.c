@@ -11,9 +11,9 @@ void initialise_suivants(void){
       
   suivants[_programme_][FIN] = 1;
 
-  suivants[_optDecVariable_][ID_FCT] = 1;
-  suivants[_optDecVariable_][FIN] = 1;
-  suivants[_optDecVariable_][ACCOLADE_OUVRANTE] = 1;
+  suivants[_optDecVariables_][ID_FCT] = 1;
+  suivants[_optDecVariables_][FIN] = 1;
+  suivants[_optDecVariables_][ACCOLADE_OUVRANTE] = 1;
 
   suivants[_listeDecVariables_][POINT_VIRGULE] = 1;
   suivants[_listeDecVariables_][PARENTHESE_FERMANTE] = 1;
@@ -39,6 +39,7 @@ void initialise_suivants(void){
 
   suivants[_instruction_][ID_VAR] = 1;
   suivants[_instruction_][ACCOLADE_OUVRANTE] = 1;
+  suivants[_instruction_][ACCOLADE_OUVRANTE] = 1;
   suivants[_instruction_][SI] = 1;
   suivants[_instruction_][TANTQUE] = 1;
   suivants[_instruction_][ID_FCT] = 1;
@@ -47,6 +48,7 @@ void initialise_suivants(void){
   suivants[_instruction_][POINT_VIRGULE] = 1;
 
   suivants[_instructionAffect_][ID_VAR] = 1;
+  suivants[_instructionAffect_][ACCOLADE_FERMANTE] = 1;
   suivants[_instructionAffect_][ACCOLADE_OUVRANTE] = 1;
   suivants[_instructionAffect_][SI] = 1;
   suivants[_instructionAffect_][TANTQUE] = 1;
@@ -58,6 +60,7 @@ void initialise_suivants(void){
   suivants[_instructionBloc_][FIN] = 1;
   suivants[_instructionBloc_][ID_VAR] = 1;
   suivants[_instructionBloc_][ACCOLADE_OUVRANTE] = 1;
+  suivants[_instructionBloc_][ACCOLADE_FERMANTE] = 1;
   suivants[_instructionBloc_][SI] = 1;
   suivants[_instructionBloc_][TANTQUE] = 1;
   suivants[_instructionBloc_][ID_FCT] = 1;
@@ -78,6 +81,7 @@ void initialise_suivants(void){
 
   suivants[_instructionSi_][ID_VAR] = 1;
   suivants[_instructionSi_][ACCOLADE_OUVRANTE] = 1;
+  suivants[_instructionSi_][ACCOLADE_FERMANTE] = 1;
   suivants[_instructionSi_][SI] = 1;
   suivants[_instructionSi_][TANTQUE] = 1;
   suivants[_instructionSi_][ID_FCT] = 1;
@@ -87,6 +91,7 @@ void initialise_suivants(void){
 
   suivants[_optSinon_][ID_VAR] = 1;
   suivants[_optSinon_][ACCOLADE_OUVRANTE] = 1;
+  suivants[_optSinon_][ACCOLADE_FERMANTE] = 1;
   suivants[_optSinon_][SI] = 1;
   suivants[_optSinon_][TANTQUE] = 1;
   suivants[_optSinon_][ID_FCT] = 1;
@@ -96,6 +101,7 @@ void initialise_suivants(void){
 
   suivants[_instructionTantque_][ID_VAR] = 1;
   suivants[_instructionTantque_][ACCOLADE_OUVRANTE] = 1;
+  suivants[_instructionTantque_][ACCOLADE_FERMANTE] = 1;
   suivants[_instructionTantque_][SI] = 1;
   suivants[_instructionTantque_][TANTQUE] = 1;
   suivants[_instructionTantque_][ID_FCT] = 1;
@@ -105,6 +111,7 @@ void initialise_suivants(void){
 
   suivants[_instructionAppel_][ID_VAR] = 1;
   suivants[_instructionAppel_][ACCOLADE_OUVRANTE] = 1;
+  suivants[_instructionAppel_][ACCOLADE_FERMANTE] = 1;
   suivants[_instructionAppel_][SI] = 1;
   suivants[_instructionAppel_][TANTQUE] = 1;
   suivants[_instructionAppel_][ID_FCT] = 1;
@@ -114,6 +121,7 @@ void initialise_suivants(void){
 
   suivants[_instructionRetour_][ID_VAR] = 1;
   suivants[_instructionRetour_][ACCOLADE_OUVRANTE] = 1;
+  suivants[_instructionRetour_][ACCOLADE_FERMANTE] = 1;
   suivants[_instructionRetour_][SI] = 1;
   suivants[_instructionRetour_][TANTQUE] = 1;
   suivants[_instructionRetour_][ID_FCT] = 1;
@@ -123,6 +131,7 @@ void initialise_suivants(void){
 
   suivants[_instructionEcriture_][ID_VAR] = 1;
   suivants[_instructionEcriture_][ACCOLADE_OUVRANTE] = 1;
+  suivants[_instructionEcriture_][ACCOLADE_FERMANTE] = 1;
   suivants[_instructionEcriture_][SI] = 1;
   suivants[_instructionEcriture_][TANTQUE] = 1;
   suivants[_instructionEcriture_][ID_FCT] = 1;
@@ -132,6 +141,7 @@ void initialise_suivants(void){
 
   suivants[_instructionVide_][ID_VAR] = 1;
   suivants[_instructionVide_][ACCOLADE_OUVRANTE] = 1;
+  suivants[_instructionVide_][ACCOLADE_FERMANTE] = 1;
   suivants[_instructionVide_][SI] = 1;
   suivants[_instructionVide_][TANTQUE] = 1;
   suivants[_instructionVide_][ID_FCT] = 1;
@@ -309,7 +319,7 @@ void initialise_suivants(void){
   suivants[_listeExpressionsBis_][PARENTHESE_FERMANTE] = 1;
 }
 
-int est_suivant(int terminal, int non_terminal)
+int est_suivant(int non_terminal, int terminal)
 {
   return suivants[non_terminal][terminal];
 }

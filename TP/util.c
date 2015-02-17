@@ -35,7 +35,7 @@ void indent() {
     }    
 }
 /*-------------------------------------------------------------------------*/
-void affiche_balise_ouvrante(char *fct_, int trace_xml)
+void affiche_balise_ouvrante(const char *fct_, int trace_xml)
 {
   if( trace_xml ) {
     indent();
@@ -46,7 +46,7 @@ void affiche_balise_ouvrante(char *fct_, int trace_xml)
 
 /*-------------------------------------------------------------------------*/
 
-void affiche_balise_fermante(char *fct_, int trace_xml)
+void affiche_balise_fermante(const char *fct_, int trace_xml)
 {
   if(trace_xml) {
     indent_xml -= indent_step ;

@@ -13,8 +13,8 @@ void initialise_premiers(void){
   premiers[_programme_][ID_FCT] = 1;
   premiers[_programme_][EPSILON] = 1;
 
-  premiers[_optDecVariable_][ENTIER] = 1;
-  premiers[_optDecVariable_][EPSILON] = 1;
+  premiers[_optDecVariables_][ENTIER] = 1;
+  premiers[_optDecVariables_][EPSILON] = 1;
 
   premiers[_listeDecVariables_][ENTIER] = 1;
   
@@ -117,46 +117,46 @@ void initialise_premiers(void){
   premiers[_expArith_][ID_VAR] = 1;
   premiers[_expArith_][LIRE] = 1;
 
-  premier[_expArithBis_][PLUS] = 1;
-  premier[_expArithBis_][MOINS] = 1;
-  premier[_expArithBis_][EPSILON] = 1;
+  premiers[_expArithBis_][PLUS] = 1;
+  premiers[_expArithBis_][MOINS] = 1;
+  premiers[_expArithBis_][EPSILON] = 1;
 
-  premier[_terme_][PARENTHESE_OUVRANTE] = 1;
-  premier[_terme_][NOMBRE] = 1;
-  premier[_terme_][ID_FCT] = 1;
-  premier[_terme_][ID_VAR] = 1;
-  premier[_terme_][LIRE] = 1;
+  premiers[_terme_][PARENTHESE_OUVRANTE] = 1;
+  premiers[_terme_][NOMBRE] = 1;
+  premiers[_terme_][ID_FCT] = 1;
+  premiers[_terme_][ID_VAR] = 1;
+  premiers[_terme_][LIRE] = 1;
 
-  premier[_termeBis_][FOIS] = 1;
-  premier[_termeBis_][DIVISE] = 1;
-  premier[_termeBis_][EPSILON] = 1;
+  premiers[_termeBis_][FOIS] = 1;
+  premiers[_termeBis_][DIVISE] = 1;
+  premiers[_termeBis_][EPSILON] = 1;
     
-  premier[_facteur_][PARENTHESE_OUVRANTE] = 1;
-  premier[_facteur_][NOMBRE] = 1;
-  premier[_facteur_][ID_FCT] = 1;
-  premier[_facteur_][ID_VAR] = 1;
-  premier[_facteur_][LIRE] = 1;
+  premiers[_facteur_][PARENTHESE_OUVRANTE] = 1;
+  premiers[_facteur_][NOMBRE] = 1;
+  premiers[_facteur_][ID_FCT] = 1;
+  premiers[_facteur_][ID_VAR] = 1;
+  premiers[_facteur_][LIRE] = 1;
 
-  premier[_var_][ID_VAR] = 1;
+  premiers[_var_][ID_VAR] = 1;
 
-  premier[_optIndice_][CROCHET_OUVRANT] = 1;
-  premier[_optIndice_][EPSILON] = 1;
+  premiers[_optIndice_][CROCHET_OUVRANT] = 1;
+  premiers[_optIndice_][EPSILON] = 1;
 
-  premier[_appelFct_][ID_FCT] = 1;
+  premiers[_appelFct_][ID_FCT] = 1;
 
-  premier[_listeExpressions_][NON] = 1;
-  premier[_listeExpressions_][PARENTHESE_OUVRANTE] = 1;
-  premier[_listeExpressions_][NOMBRE] = 1;
-  premier[_listeExpressions_][ID_FCT] = 1;
-  premier[_listeExpressions_][ID_VAR] = 1;
-  premier[_listeExpressions_][LIRE] = 1;
-  premier[_listeExpressions_][EPSILON] = 1;
+  premiers[_listeExpressions_][NON] = 1;
+  premiers[_listeExpressions_][PARENTHESE_OUVRANTE] = 1;
+  premiers[_listeExpressions_][NOMBRE] = 1;
+  premiers[_listeExpressions_][ID_FCT] = 1;
+  premiers[_listeExpressions_][ID_VAR] = 1;
+  premiers[_listeExpressions_][LIRE] = 1;
+  premiers[_listeExpressions_][EPSILON] = 1;
 
-  premier[_listeExpressionsBis_][VIRGULE] = 1;
-  premier[_listeExpressionsBis_][EPSILON] = 1;
+  premiers[_listeExpressionsBis_][VIRGULE] = 1;
+  premiers[_listeExpressionsBis_][EPSILON] = 1;
 }
 
 int est_premier(int non_terminal, int terminal)
 {
-  return premiers[terminal][non_terminal];
+  return premiers[non_terminal][terminal];
 }
