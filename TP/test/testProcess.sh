@@ -10,7 +10,7 @@ pwd
 for f in $DIRECTORYSOURCE
 do
   echo "Execution du fichier : $f"
-  ../test_yylex $f
+  test_yylex $f
   echo
   echo
   if (( $? != 0 )); then return 1; fi
